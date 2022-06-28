@@ -1,9 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
-const IndexPage = () => {
+function BlogPage() {
   const data = useStaticQuery(graphql`
     query {
       allMdx(sort: { fields: frontmatter___date, order: DESC }) {
@@ -18,19 +18,16 @@ const IndexPage = () => {
       }
     }
   `);
-
   return (
     <Layout pageTitle="My Blog Posts">
       {data.allMdx.nodes.map((node) => (
         <article key={node.id}>
           <h2>{node.frontmatter.title}</h2>
-          <p>Posted: {node.frontmatter.data}</p>
+          <p>Posted: {node.frontmatter.date}</p>
           <MDXRenderer>{node.body}</MDXRenderer>
-          {node.name}
         </article>
       ))}
     </Layout>
   );
-};
-
-export default IndexPage;
+}
+export default BlogPage;

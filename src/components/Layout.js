@@ -1,18 +1,40 @@
 import { Link } from "gatsby";
 import React from "react";
 
-function Layout({ children }) {
+import {
+  container,
+  heading,
+  navLinks,
+  navLinkItem,
+  navLinkText,
+} from "./Layout.module.css";
+
+function Layout({ pageTitle, children }) {
   return (
-    <>
-      <div style={{ display: "flex", gap: 10 }}>
-        <Link to="/">홈</Link>
-        <Link to="/about">어바웃</Link>
-        <Link to="/test">테스트</Link>
-        <Link to="/test-space">테스트-스페이스!!</Link>
-      </div>
-      {children}
-      <div>백엔드 개발자 정종민 - 기술블로그</div>
-    </>
+    <div className={container}>
+      <title>{pageTitle}</title>
+      <nav>
+        <ul className={navLinks}>
+          <li className={navLinkItem}>
+            <Link className={navLinkText} to="/">
+              Home
+            </Link>
+          </li>
+          <li className={navLinkItem}>
+            <Link className={navLinkText} to="/about">
+              About
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      <main>
+        <h1 className={heading}>{pageTitle}</h1>
+        {children}
+      </main>
+
+      <div>© 2016-2022 Jongmin. All Rights Reserved.</div>
+    </div>
   );
 }
 
